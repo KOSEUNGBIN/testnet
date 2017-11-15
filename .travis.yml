@@ -1,0 +1,12 @@
+language: groovy
+
+branches:
+  only:
+  - master
+
+os:	linux
+
+jobs:
+  include:
+    - stage: sh ./shell/build.sh
+      script: sh ./shell/testnet.sh

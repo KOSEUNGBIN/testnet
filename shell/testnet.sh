@@ -6,9 +6,6 @@ function pingtest()
   echo '' >> $filename.txt
   while read line
   do
-    if [    $line ==   ''  ];  then
-        break
-    fi
     ping -c10 -W2 -q $line
 
     if [  $? -eq 0  ];  then
@@ -25,14 +22,15 @@ function pingtest()
 function logintest()
 {
     cd ../build/libs
-    java -jar testnet-1.0-SNAPSHOT.jar $1 $2 $3
+    java -jar testnet-1.0-SNAPSHOT.jar $1 $2
 }
 
-if [  $# -ne 4  ];  then
-  echo "Usage : $0 <Input File For Ping> <Input File For Login> <Student ID> <Student Password>"
+if [  $# -ne 3  ];  then
+  echo "Usage : $0 <Input File For Ping> <Student ID> <Student Password>"
 else
     pingtest    $1
-    logintest   $2  $3  $4
+    logintest   $2  $3
+
 fi
 
 
