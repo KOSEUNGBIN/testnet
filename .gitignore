@@ -1,0 +1,10 @@
+
+\.DS_Store
+
+\.idea/
+
+out/production/classes/
+
+build/**
+
+.gradle/**

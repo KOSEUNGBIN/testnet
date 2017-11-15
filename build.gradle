@@ -1,0 +1,33 @@
+group 'com.landvibe.testnet'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    def gebVersion = '2.0'
+    def groovyVersion = '2.4.7'
+
+
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
+    compile group: 'org.gebish', name: 'geb-core', version: gebVersion
+
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'junit:junit:4.12'
+
+}
+
+task testnetjar(type: Jar , dependsOn:[':compileJava',':compileGroovy']) {
+    from files(sourceSets.main.output.classesDir)
+    from configurations.runtime.asFileTree.files.collect { zipTree(it) }
+
+    manifest {
+        attributes 'Main-Class': 'Testnet'
+    }
+}
+
+
